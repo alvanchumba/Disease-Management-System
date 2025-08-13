@@ -24,7 +24,7 @@ import {
 } from "../utils/storage";
 import { useFocusEffect } from "@react-navigation/native";
 import {
-  registerForPushNotificationsAsync,
+  registerForPushnotificationAsync,
   scheduleMedicationReminder,
 } from "../utils/notifications";
 
@@ -37,28 +37,28 @@ const QUICK_ACTIONS = [
   {
     icon: "add-circle-outline" as const,
     label: "Add\nMedication",
-    route: "/medications/add" as const,
+    route: "./medications/add" as const,
     color: "#2E7D32",
     gradient: ["#4CAF50", "#2E7D32"] as [string, string],
   },
   {
     icon: "calendar-outline" as const,
     label: "Calendar\nView",
-    route: "/calendar" as const,
+    route: "./calendar" as const,
     color: "#1976D2",
     gradient: ["#2196F3", "#1976D2"] as [string, string],
   },
   {
     icon: "time-outline" as const,
     label: "History\nLog",
-    route: "/history" as const,
+    route: "./history" as const,
     color: "#C2185B",
     gradient: ["#E91E63", "#C2185B"] as [string, string],
   },
   {
     icon: "medical-outline" as const,
     label: "Refill\nTracker",
-    route: "/refills" as const,
+    route: "./refills" as const,
     color: "#E64A19",
     gradient: ["#FF5722", "#E64A19"] as [string, string],
   },
@@ -180,7 +180,7 @@ export default function HomeScreen() {
 
   const setupNotifications = async () => {
     try {
-      const token = await registerForPushNotificationsAsync();
+      const token = await registerForPushnotificationAsync();
       if (!token) {
         console.log("Failed to get push notification token");
         return;
@@ -305,7 +305,7 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Today's Schedule</Text>
-            <Link href="/calendar" asChild>
+            <Link href="./calendar" asChild>
               <TouchableOpacity>
                 <Text style={styles.seeAllButton}>See All</Text>
               </TouchableOpacity>
@@ -317,7 +317,7 @@ export default function HomeScreen() {
               <Text style={styles.emptyStateText}>
                 No medications scheduled for today
               </Text>
-              <Link href="/medications/add" asChild>
+              <Link href="./medications/add" asChild>
                 <TouchableOpacity style={styles.addMedicationButton}>
                   <Text style={styles.addMedicationButtonText}>
                     Add Medication
