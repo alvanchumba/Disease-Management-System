@@ -16,6 +16,13 @@ export default function RootLayout(){
     }}>
       <Stack.Screen name="index"
       options={{headerShown: false}}/>
+
+      <Stack.Screen name="medications/add"
+      options={{
+        headerShown: false,
+        headerBackTitle:'',
+        title:""
+      }}/>
     </Stack>
     </>
   )

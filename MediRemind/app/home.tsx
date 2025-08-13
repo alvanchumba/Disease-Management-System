@@ -380,7 +380,7 @@ export default function HomeScreen() {
       </View>
 
       <Modal
-        visible={showNotifications}
+        visible={false}
         animationType="slide"
         transparent={true}
         onRequestClose={() => setShowNotifications(false)}

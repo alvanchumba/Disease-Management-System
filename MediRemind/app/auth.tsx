@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, TextBase} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import { useRouter } from 'expo-router';
 import * as LocalAuthentication  from 'expo-local-authentication'
 import { Ionicons } from '@expo/vector-icons';
@@ -48,7 +48,6 @@ export default function AuthScreen() {
 
             const auth = await LocalAuthentication.authenticateAsync({
                 
-                // Prompt message changes depending on biometric availability
                 promptMessage: hasHardware && isEnrolled ? 
                 'Use face ID/TouchID' : 
                 'Enter your PIN to access medications', 
@@ -58,7 +57,7 @@ export default function AuthScreen() {
             });
 
             if (auth.success) {
-                router.replace('/')
+                router.replace('/home')
             } else {
                 setError('Authentication Failed: Please try again')
             }
