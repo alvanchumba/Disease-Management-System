@@ -24,7 +24,7 @@ import {
 } from "../utils/storage";
 import { useFocusEffect } from "@react-navigation/native";
 import {
-  registerForPushNotificationsAsync,
+  registerForPushnotificationAsync,
   scheduleMedicationReminder,
 } from "../utils/notifications";
 
@@ -180,7 +180,7 @@ export default function HomeScreen() {
 
   const setupNotifications = async () => {
     try {
-      const token = await registerForPushNotificationsAsync();
+      const token = await registerForPushnotificationAsync();
       if (!token) {
         console.log("Failed to get push notification token");
         return;
