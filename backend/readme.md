@@ -9,9 +9,6 @@ AI Drug Scanner: Use the Google Cloud Vision API to identify medicines or read t
 
 Setup and Installation
 Clone the Repository
-Bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
 Create and Activate a Virtual Environment
 Bash
 # On macOS/Linux
