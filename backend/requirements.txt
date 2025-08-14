@@ -1,0 +1,4 @@
+rich
+pycryptodome
+pandas
+scikit-learn
