@@ -1,19 +1,3 @@
-'''
-from fastapi import FastAPI, Depends, HTTPException, APIRouter
-from routers import ai, medication, mood, tips, uploads
-
-app = FastAPI(title="Disease Management API")
-
-app.include_router(ai.router)
-app.include_router(medication.router)
-app.include_router(mood.router)
-app.include_router(tips.router)
-app.include_router(uploads.router)
-
-@app.get('/')
-def root():
-    return {"message":"API is working"}
-'''
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from datetime import datetime
@@ -136,23 +120,7 @@ async def get_medication_history(user_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-# Mood routes
-'''
-@app.post("/mood/log")
-async def log_mood(user_id: str, mood: str, notes: str = None):
-    """Record patient mood"""
-    if user_id not in users_db:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    log = MoodLog(
-        user_id=user_id,
-        mood=mood,
-        notes=notes,
-        logged_at=datetime.now()
-    )
-    mood_logs.append(log)
-    return {"message": "Mood logged"}
-'''
+#mood routes
 @app.post("/mood/log")
 async def log_mood(log: MoodLog):
     try:
@@ -170,14 +138,6 @@ async def log_mood(log: MoodLog):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-'''
-@app.get("/mood/history")
-async def mood_history(user_id: str):
-    """Get mood history"""
-    user_logs = [log for log in mood_logs if log.user_id == user_id]
-    return {"mood_history": user_logs}
-
-'''
 @app.get("/mood/history/{user_id}")
 async def get_mood_history(user_id: str):
     """Retrieve mood logs from Firebase"""
@@ -200,22 +160,10 @@ async def get_mood_history(user_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))    
 
-# Drug scanner route
-'''
-@app.post("/scan/drug")
-async def scan_drug(file: UploadFile = File(...)):
-    """Identify medicine from photo"""
-    # In real app, you'd call an image recognition API here
-    return {
-        "message": "Medicine identified",
-        "result": "Paracetamol 500mg",
-        "details": "Take 1 tablet every 6 hours as needed"
-    }
-'''
 
 #google Cloud vision client
 client = vision.ImageAnnotatorClient()
-
+# Drug scanner route
 @app.post("/scan/drug")
 async def scan_drug_with_ocr(file: UploadFile = File(...)):
     #identify medicine from a photo using Google CLoud Vision API(generic label detection)
@@ -244,19 +192,6 @@ async def scan_drug_with_ocr(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 #$env:GOOGLE_APPLICATION_CREDENTIALS="google_serviceAccountKey.json"    
 
-
-# Health tips routes
-'''
-@app.get("/tips")
-async def get_tips(user_id: str):
-    """Get personalized health tips"""
-    if user_id not in users_db:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    user_condition = users_db[user_id].condition
-    tips = health_tips_db.get(user_condition, [])
-    return {"tips": tips}
-'''
 try: 
     tips_df = pd.read_csv("health_precautions.csv")
     print("Health tips loaded successfully.")
