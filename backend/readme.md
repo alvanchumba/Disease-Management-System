@@ -1,5 +1,6 @@
 Disease Management API
 This is a FastAPI-based backend for a disease management application. It provides endpoints for users to log medication and mood, get personalized health tips, and scan images to identify medicines using the Google Cloud Vision API.
+
 Features
 User Management: Register new users with a medical condition.
 Medication Logging: Log medication intake and retrieve history using Firebase Realtime Database.
