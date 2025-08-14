@@ -1,4 +1,7 @@
-rich
-pycryptodome
+fastapi
+uvicorn
+pydantic
 pandas
-scikit-learn
+firebase-admin
+google-cloud-vision
+requests
